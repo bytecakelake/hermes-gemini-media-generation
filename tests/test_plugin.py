@@ -65,8 +65,3 @@ def test_setup_schema_asks_for_api_key(fake_auth):
         schema = provider.get_setup_schema()
         assert schema["env_vars"][0]["key"] == "GEMINI_API_KEY"
         assert schema["env_vars"][0]["url"].startswith("https://aistudio.google.com")
-
-
-def test_video_generate_stub_returns_error_dict_not_exception(fake_auth):
-    vid = GeminiVideoGenProvider(fake_auth()).generate("a cat")
-    assert vid["success"] is False and vid["provider"] == "gemini"

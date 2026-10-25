@@ -157,3 +157,20 @@ def load_references(sources: list[str]) -> list[LoadedImage]:
             raise ReferenceImageError("Reference images together are larger than 18 MB.")
         loaded.append(image)
     return loaded
+
+
+def mp4_duration_seconds(raw: bytes) -> Optional[float]:
+    """Duration from the ``mvhd`` atom of an MP4, or None when it cannot be read."""
+    import struct
+
+    i = raw.find(b"mvhd")
+    if i < 0:
+        return None
+    try:
+        if raw[i + 4] == 0:
+            timescale, duration = struct.unpack(">II", raw[i + 16 : i + 24])
+        else:
+            timescale, duration = struct.unpack(">IQ", raw[i + 24 : i + 36])
+    except struct.error:
+        return None
+    return round(duration / timescale, 2) if timescale else None

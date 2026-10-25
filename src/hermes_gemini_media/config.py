@@ -76,3 +76,13 @@ def resolve_model(kind: str, caller_model: Optional[str], ordered_ids: Iterable[
     if not ids or default in ids:
         return default
     return ids[0]
+
+
+def timeout_seconds(kind: str, default: float) -> float:
+    """``<kind>_gen.gemini.timeout_s`` (10-1800), else ``default``."""
+    value = provider_settings(kind).get("timeout_s")
+    try:
+        seconds = float(value)
+    except (TypeError, ValueError):
+        return default
+    return max(10.0, min(1800.0, seconds))

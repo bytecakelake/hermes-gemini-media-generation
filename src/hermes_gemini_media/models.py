@@ -77,6 +77,14 @@ IMAGE_LIMITS: dict[str, dict[str, Any]] = {
 }
 DEFAULT_IMAGE_MAX_REFS = 14
 
+# Gemini Omni limits, measured against the live API (2026-10): duration 3-10 s sent as "<n>s"
+# (default 10 s); 16:9 and 9:16 only; reference images worked up to 6 (8 did not return in 5 min).
+VIDEO_MIN_DURATION = 3
+VIDEO_MAX_DURATION = 10
+VIDEO_ASPECT_RATIOS = ("16:9", "9:16")
+VIDEO_RESOLUTIONS = ("360p", "720p", "1080p", "4k")
+VIDEO_MAX_REFS = 6
+
 
 def image_limits(model_id: str) -> dict[str, Any]:
     return IMAGE_LIMITS.get(model_id, {"sizes": None, "max_refs": DEFAULT_IMAGE_MAX_REFS})

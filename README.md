@@ -4,9 +4,20 @@ Google Gemini **image** (Nano Banana) and **video** (Gemini Omni) backends for
 [Hermes Agent](https://github.com/NousResearch/hermes-agent) `image_generate` and `video_generate`,
 in a single plugin built on the `google-genai` SDK.
 
-> Status: **v0.1.0 in development.** Phase 1 (scaffold, API-key auth, live model catalog) is done.
-> `generate()` for images (Phase 2) and video (Phase 4) is not implemented yet, so the backends
-> appear in `hermes tools` but return an error when called.
+> Status: **v0.1.0 in development.** Image and video generation work against the live Gemini API
+> with an API key. OAuth sign-in is planned after the first release.
+
+## Features
+
+* `image_generate`: Nano Banana models, text-to-image and reference-guided editing (up to 14
+  reference images), 1K/2K/4K.
+* `video_generate`: Gemini Omni, text-to-video, image-to-video and reference-to-video with native
+  audio, 3-10 s, 16:9 / 9:16, 360p-4K.
+* Model picker built from your key's live `models.list` (cached, with an offline fallback).
+* One plugin, one API key, built on the official `google-genai` SDK.
+
+See [docs/MODELS.md](docs/MODELS.md) for models, measured limits, parameter handling and where
+generated files are stored.
 
 ## Install (once released)
 

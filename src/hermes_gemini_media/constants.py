@@ -22,5 +22,7 @@ MODELS_LIST_TIMEOUT_S = 10.0
 MODELS_CACHE_DIRNAME = "gemini_media"
 MODELS_CACHE_FILENAME = "models.json"
 
-IMAGE_REQUEST_TIMEOUT_S = 180.0
-VIDEO_REQUEST_TIMEOUT_S = 900.0
+# Wall-clock deadlines (see client.call_with_deadline). Measured typical times: image 7-16 s,
+# video 15-25 s at 360p-720p. Override with image_gen.gemini.timeout_s / video_gen.gemini.timeout_s.
+IMAGE_REQUEST_TIMEOUT_S = 150.0
+VIDEO_REQUEST_TIMEOUT_S = 300.0

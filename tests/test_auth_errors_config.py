@@ -87,3 +87,27 @@ def test_resolve_model_defaults(monkeypatch):
     monkeypatch.setattr(config, "_load_config", lambda: {})
     assert config.resolve_model("video", None, []) == "gemini-omni-1.1-flash"
     assert config.resolve_model("video", None, ["something-else"]) == "something-else"
+
+
+def test_call_with_deadline_returns_raises_and_times_out():
+    import time
+
+    from hermes_gemini_media.client import DeadlineExceeded, call_with_deadline
+
+    assert call_with_deadline(lambda: 42, 5) == 42
+    with pytest.raises(ValueError, match="boom"):
+        call_with_deadline(lambda: (_ for _ in ()).throw(ValueError("boom")), 5)
+    started = time.time()
+    with pytest.raises(DeadlineExceeded):
+        call_with_deadline(lambda: time.sleep(5), 0.2)
+    assert time.time() - started < 2
+    assert errors.classify_exception(DeadlineExceeded("Gemini did not respond within 1 s"))[0] == errors.TIMEOUT
+
+
+def test_timeout_seconds_setting(monkeypatch):
+    cfg = {"video_gen": {"gemini": {"timeout_s": 45}}}
+    monkeypatch.setattr(config, "_load_config", lambda: cfg)
+    assert config.timeout_seconds("video", 300.0) == 45.0
+    assert config.timeout_seconds("image", 150.0) == 150.0
+    cfg["video_gen"]["gemini"]["timeout_s"] = 99999
+    assert config.timeout_seconds("video", 300.0) == 1800.0

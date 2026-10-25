@@ -52,7 +52,7 @@ def classify_exception(exc: BaseException) -> tuple[str, str]:
     code = _status_code(exc)
     name = type(exc).__name__.lower()
 
-    if "timeout" in name or "timed out" in lowered or "timeout" in lowered:
+    if "timeout" in name or "deadline" in name or "timed out" in lowered or "timeout" in lowered or "did not respond" in lowered:
         return TIMEOUT, message
     if code in (401, 403) or "permission_denied" in lowered or "unauthenticated" in lowered:
         return AUTH_ERROR, message

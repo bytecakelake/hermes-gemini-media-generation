@@ -23,7 +23,7 @@ from agent.image_gen_provider import (
 
 from . import config, errors, media_io, models
 from .auth import AuthStrategy, default_auth
-from .client import build_client, sdk_available
+from .client import build_client, call_with_deadline, sdk_available
 from .constants import API_KEY_ENV_VARS, API_KEY_URL, IMAGE_REQUEST_TIMEOUT_S, PROVIDER_NAME
 
 logger = logging.getLogger(__name__)
@@ -144,8 +144,12 @@ class GeminiImageGenProvider(ImageGenProvider):
             contents = prompt
 
         try:
-            client = self._client_factory(self._auth, timeout_s=IMAGE_REQUEST_TIMEOUT_S)
-            interaction = client.interactions.create(model=model, input=contents, response_format=response_format)
+            deadline = config.timeout_seconds("image", IMAGE_REQUEST_TIMEOUT_S)
+            client = self._client_factory(self._auth, timeout_s=deadline)
+            interaction = call_with_deadline(
+                lambda: client.interactions.create(model=model, input=contents, response_format=response_format),
+                deadline,
+            )
         except Exception as exc:
             error_type, message = errors.classify_exception(exc)
             logger.debug("image generation failed: %s", error_type)
