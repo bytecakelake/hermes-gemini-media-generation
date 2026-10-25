@@ -1,0 +1,6 @@
+hermes-gemini-media-generation
+Copyright 2026 bytecakaleke
+
+This product is licensed under the Apache License, Version 2.0.
+It was written from scratch against the public Gemini API documentation and the
+Hermes Agent plugin documentation. It does not copy code from other Hermes plugins.

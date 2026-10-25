@@ -1,0 +1,10 @@
+name: gemini-media
+version: 0.1.0.dev0
+description: "Google Gemini image (Nano Banana) and video (Gemini Omni) generation backends for image_generate / video_generate, using the google-genai SDK."
+author: bytecakaleke
+kind: backend
+license: Apache-2.0
+requires_env:
+  - GEMINI_API_KEY
+python_dependencies:
+  - "google-genai>=2.33,<3"
