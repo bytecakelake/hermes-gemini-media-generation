@@ -1,4 +1,4 @@
-# Copyright 2026 bytecakaleke
+# Copyright 2026 bytecakelake
 # SPDX-License-Identifier: Apache-2.0
 """Real video generation at 360p / 3 s (smallest, cheapest). Run:  pytest -m live tests/live/test_video_live.py -s"""
 

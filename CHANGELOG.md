@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0 (unreleased)
+## 0.1.0 - 2026-10-26 (MVP)
 
 * Image generation (`gemini-nano-banana-2.1` and other Gemini image models) with up to 14
   reference images, 1K/2K/4K, aspect mapping.

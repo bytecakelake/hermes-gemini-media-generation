@@ -1,4 +1,4 @@
-# Copyright 2026 bytecakaleke
+# Copyright 2026 bytecakelake
 # SPDX-License-Identifier: Apache-2.0
 """Shared constants. Model ids here are defaults only; the live ``models.list`` result decides
 what is actually offered (see ``models.py``)."""

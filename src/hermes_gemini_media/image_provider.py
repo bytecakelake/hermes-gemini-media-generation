@@ -1,4 +1,4 @@
-# Copyright 2026 bytecakaleke
+# Copyright 2026 bytecakelake
 # SPDX-License-Identifier: Apache-2.0
 """``image_generate`` backend: Gemini image models ("Nano Banana") through the Interactions API.
 

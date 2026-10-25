@@ -1,4 +1,4 @@
-# Copyright 2026 bytecakaleke
+# Copyright 2026 bytecakelake
 # SPDX-License-Identifier: Apache-2.0
 """Load user-supplied reference images (URL, ``data:`` URI or local path) as inline base64.
 

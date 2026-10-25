@@ -1,7 +1,7 @@
 # Draft for a PR to NousResearch/hermes-agent: plugin-catalog/gemini-media.yaml
 # Fill `sha` with the full 40-character release commit before submitting.
 name: gemini-media
-repo: https://github.com/bytecakaleke/hermes-gemini-media-generation
+repo: https://github.com/bytecakelake/hermes-gemini-media-generation
 sha: "<40-hex release commit>"
 description: >-
   Google Gemini image (Nano Banana) and video (Gemini Omni) generation backends for
@@ -9,10 +9,10 @@ description: >-
   Disclosure: prompts, reference images and the API key are sent to
   generativelanguage.googleapis.com; reference-image URLs are downloaded by the plugin
   (public hosts only); generation is billed to the API key's Google project.
-maintainer: bytecakaleke
+maintainer: bytecakelake
 tier: community
 category: media
-docs_url: https://github.com/bytecakaleke/hermes-gemini-media-generation#readme
+docs_url: https://github.com/bytecakelake/hermes-gemini-media-generation#readme
 version: "0.1.0"
 platforms: []
 capabilities:

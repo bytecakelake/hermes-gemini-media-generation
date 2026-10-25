@@ -1,4 +1,4 @@
-# Copyright 2026 bytecakaleke
+# Copyright 2026 bytecakelake
 # SPDX-License-Identifier: Apache-2.0
 """Hermes entry point: registers both backends from one plugin."""
 

@@ -4,8 +4,9 @@ Google Gemini **image** (Nano Banana) and **video** (Gemini Omni) backends for
 [Hermes Agent](https://github.com/NousResearch/hermes-agent) `image_generate` and `video_generate`,
 in a single plugin built on the `google-genai` SDK.
 
-> Status: **v0.1.0 in development.** Image and video generation work against the live Gemini API
-> with an API key. OAuth sign-in is planned after the first release.
+> Status: **v0.1.0 (MVP).** Image and video generation work against the live Gemini API with an
+> API key. OAuth sign-in is planned for a later release. The Gemini Omni video service stalls
+> intermittently; see [Known behaviour](#known-behaviour).
 
 ## Features
 
@@ -19,10 +20,10 @@ in a single plugin built on the `google-genai` SDK.
 See [docs/MODELS.md](docs/MODELS.md) for models, measured limits, parameter handling and where
 generated files are stored.
 
-## Install (once released)
+## Install
 
 ```bash
-hermes plugins install bytecakaleke/hermes-gemini-media-generation
+hermes plugins install bytecakelake/hermes-gemini-media-generation
 hermes plugins enable gemini-media
 hermes tools        # Image Generation / Video Generation -> Google Gemini
 ```

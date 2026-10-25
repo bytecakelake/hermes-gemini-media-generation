@@ -1,4 +1,4 @@
-# Copyright 2026 bytecakaleke
+# Copyright 2026 bytecakelake
 # SPDX-License-Identifier: Apache-2.0
 """``google-genai`` client factory. The only module that constructs SDK clients, so the SDK can
 be swapped or wrapped (e.g. an OAuth transport in Phase 6) in one place."""

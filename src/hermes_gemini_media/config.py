@@ -1,4 +1,4 @@
-# Copyright 2026 bytecakaleke
+# Copyright 2026 bytecakelake
 # SPDX-License-Identifier: Apache-2.0
 """Read non-secret settings (``image_gen.gemini.*`` / ``video_gen.gemini.*``) and resolve the model.
 

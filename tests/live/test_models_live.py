@@ -1,4 +1,4 @@
-# Copyright 2026 bytecakaleke
+# Copyright 2026 bytecakelake
 # SPDX-License-Identifier: Apache-2.0
 """Calls the real Gemini API. Run with:  pytest -m live  (needs GEMINI_API_KEY in the environment)."""
 

@@ -1,4 +1,4 @@
-# Copyright 2026 bytecakaleke
+# Copyright 2026 bytecakelake
 # SPDX-License-Identifier: Apache-2.0
 """Map SDK / transport exceptions to Hermes ``error_type`` strings and scrub secrets.
 

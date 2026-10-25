@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "hermes-gemini-media-generation"
-version = "0.1.0.dev0"
+version = "0.1.0"
 description = "Google Gemini image and video generation backends for Hermes Agent"
 readme = "README.md"
 requires-python = ">=3.10"
 license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE"]
-authors = [{ name = "bytecakaleke" }]
+authors = [{ name = "bytecakelake" }]
 dependencies = ["google-genai>=2.33,<3"]
 
 [project.optional-dependencies]

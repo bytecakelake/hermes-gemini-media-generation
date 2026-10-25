@@ -1,4 +1,4 @@
-# Copyright 2026 bytecakaleke
+# Copyright 2026 bytecakelake
 # SPDX-License-Identifier: Apache-2.0
 from hermes_gemini_media import models
 from hermes_gemini_media.image_provider import GeminiImageGenProvider

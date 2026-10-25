@@ -1,4 +1,4 @@
-# Copyright 2026 bytecakaleke
+# Copyright 2026 bytecakelake
 # SPDX-License-Identifier: Apache-2.0
 """Real image generation (small cost). Run with:  pytest -m live tests/live/test_image_live.py -s"""
 
