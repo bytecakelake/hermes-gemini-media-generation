@@ -56,3 +56,14 @@ def call_with_deadline(fn: Callable[[], Any], seconds: float) -> Any:
     if "error" in box:
         raise box["error"]
     return box["value"]
+
+
+def response_format_kwargs(response_format: dict[str, Any]) -> dict[str, Any]:
+    """Keyword arguments that deliver ``response_format`` intact on every supported SDK version.
+
+    Hermes pins ``google-auth``, which caps ``google-genai`` at 2.12.x on a stock install. That
+    release silently drops response-format fields it does not model yet (``resolution`` for video).
+    ``extra_body`` is sent verbatim and replaces the typed field, so passing the same complete dict
+    through both keeps newer SDKs unchanged and makes older ones lossless.
+    """
+    return {"response_format": response_format, "extra_body": {"response_format": response_format}}

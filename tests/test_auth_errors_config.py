@@ -111,3 +111,11 @@ def test_timeout_seconds_setting(monkeypatch):
     assert config.timeout_seconds("image", 150.0) == 150.0
     cfg["video_gen"]["gemini"]["timeout_s"] = 99999
     assert config.timeout_seconds("video", 300.0) == 1800.0
+
+
+def test_response_format_is_delivered_through_both_channels():
+    from hermes_gemini_media.client import response_format_kwargs
+
+    rf = {"type": "video", "aspect_ratio": "16:9", "resolution": "4k", "duration": "5s"}
+    kwargs = response_format_kwargs(rf)
+    assert kwargs["response_format"] == rf and kwargs["extra_body"] == {"response_format": rf}

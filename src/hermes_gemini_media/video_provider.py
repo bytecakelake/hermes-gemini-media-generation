@@ -27,7 +27,7 @@ from agent.video_gen_provider import (
 
 from . import config, errors, media_io, models
 from .auth import AuthStrategy, default_auth
-from .client import build_client, call_with_deadline, sdk_available
+from .client import build_client, call_with_deadline, response_format_kwargs, sdk_available
 from .constants import API_KEY_ENV_VARS, API_KEY_URL, PROVIDER_NAME, VIDEO_REQUEST_TIMEOUT_S
 
 logger = logging.getLogger(__name__)
@@ -196,7 +196,7 @@ class GeminiVideoGenProvider(VideoGenProvider):
         try:
             deadline = config.timeout_seconds("video", VIDEO_REQUEST_TIMEOUT_S)
             client = self._client_factory(self._auth, timeout_s=deadline)
-            request: dict[str, Any] = {"model": model_id, "input": contents, "response_format": response_format}
+            request: dict[str, Any] = {"model": model_id, "input": contents, **response_format_kwargs(response_format)}
             if images:
                 # Never send task=text_to_video: measured live, that explicit task hangs until the
                 # client timeout, while omitting generation_config for text prompts returns in ~20 s.
