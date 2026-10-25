@@ -68,6 +68,20 @@ CURATED: dict[str, dict[str, Any]] = {
         "strengths": "Text/image/reference-to-video with native audio; 16:9 and 9:16; 360p-4K (upscaled)",
     },
 }
+# Per-model request limits. Only what the docs state; unknown models get no clamping.
+#   sizes: accepted ``image_size`` values; max_refs: reference images per request.
+IMAGE_LIMITS: dict[str, dict[str, Any]] = {
+    "gemini-nano-banana-2.1": {"sizes": ("1K", "2K", "4K"), "max_refs": 14},
+    "gemini-3.1-flash-image": {"sizes": ("1K", "2K", "4K"), "max_refs": 14},
+    "gemini-3.1-flash-lite-image": {"sizes": ("1K",), "max_refs": 14},
+}
+DEFAULT_IMAGE_MAX_REFS = 14
+
+
+def image_limits(model_id: str) -> dict[str, Any]:
+    return IMAGE_LIMITS.get(model_id, {"sizes": None, "max_refs": DEFAULT_IMAGE_MAX_REFS})
+
+
 # Aliases that point at a model already listed under its canonical id.
 HIDDEN = {"nano-banana-pro-preview"}
 
