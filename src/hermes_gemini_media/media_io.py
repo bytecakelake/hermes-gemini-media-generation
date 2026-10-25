@@ -69,23 +69,9 @@ def _host_is_public(host: str) -> bool:
 
 
 def url_allowed(url: str) -> bool:
-    """SSRF guard. Uses Hermes's own check when available, else a built-in public-host check."""
-    try:
-        from tools.url_safety import is_safe_url
-
-        return bool(is_safe_url(url))
-    except Exception:
-        parsed = urlparse(url)
-        return parsed.scheme in ("http", "https") and bool(parsed.hostname) and _host_is_public(parsed.hostname)
-
-
-def _read_blocked(path: str) -> None:
-    """Refuse credential/secret files via Hermes's guard when present."""
-    try:
-        from agent.file_safety import raise_if_read_blocked
-    except Exception:
-        return
-    raise_if_read_blocked(path)  # raises its own error for blocked paths
+    """SSRF guard: http(s) only, and the host must resolve to public addresses only."""
+    parsed = urlparse(url)
+    return parsed.scheme in ("http", "https") and bool(parsed.hostname) and _host_is_public(parsed.hostname)
 
 
 def _download(url: str) -> bytes:
@@ -131,10 +117,16 @@ def load_reference(source: str) -> LoadedImage:
         path = Path(os.path.expanduser(source))
         if not path.is_file():
             raise ReferenceImageError(f"Reference image file not found: {source}")
-        _read_blocked(str(path))
         if path.stat().st_size > MAX_IMAGE_BYTES:
             raise ReferenceImageError("Reference image is larger than 15 MB.")
-        raw = path.read_bytes()
+        # Read only the header first: a file that is not a supported image (a key file, a .env)
+        # is rejected before its contents are ever loaded or sent anywhere.
+        with path.open("rb") as handle:
+            header = handle.read(16)
+            if sniff_mime(header) is None:
+                raise ReferenceImageError(
+                    "Reference must be a PNG, JPEG, WebP, HEIC or HEIF image (videos are not supported).")
+            raw = header + handle.read()
         kind = "file"
 
     if not raw:

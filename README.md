@@ -59,6 +59,31 @@ in `%LOCALAPPDATA%\hermes\hermes-agent` or the directory in `HERMES_AGENT_DIR`.
 Source lives in `src/hermes_gemini_media/`; the root `__init__.py` is a three-line shim because
 Hermes loads plugins from the repository root.
 
+## What this plugin does on your machine
+
+Disclosure, as required for Hermes catalog listing:
+
+* **Network:** sends your prompt, any reference images and your API key to
+  `generativelanguage.googleapis.com` (the Gemini API). Reference images given as URLs are
+  downloaded by the plugin first (public addresses only; private/loopback hosts are refused).
+* **Files read:** only local image files you pass as `image_url` / `reference_image_urls`
+  (header-checked: anything that is not a PNG/JPEG/WebP/HEIC/HEIF image is rejected before it is
+  read in full). No credential files, no `.env`, no `auth.json`.
+* **Files written:** generated media under `$HERMES_HOME/cache/generated/`, and the model list
+  cache `$HERMES_HOME/cache/gemini_media/models.json` (contains a hash of the key, never the key).
+* **Credentials:** read through Hermes's `get_secret`; never logged, and scrubbed from errors.
+* **Cost:** image and video generation are billed by Google to the API key's project.
+* **No** telemetry, background processes, shell commands or self-updates.
+
+## Known behaviour
+
+* The Gemini Omni video endpoint sometimes stalls for minutes (observed in October 2026).
+  Calls are bounded by a wall-clock deadline (default 300 s for video, 150 s for images; set
+  `video_gen.gemini.timeout_s` / `image_gen.gemini.timeout_s`) and return `error_type: timeout`.
+  The plugin does not retry automatically because an abandoned request may still be billed.
+* Do not request `task: text_to_video` explicitly: that value hung every time in testing, so the
+  plugin leaves the task unset for text-only prompts.
+
 ## Relationship to other plugins
 
 [`semirkabir/hermes-plugin-gemini-image`](https://github.com/semirkabir/hermes-plugin-gemini-image)
