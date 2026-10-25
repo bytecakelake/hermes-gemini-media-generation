@@ -1,10 +1,14 @@
 name: gemini-media
-version: 0.1.1
+version: 0.1.2
 description: "Google Gemini image (Nano Banana) and video (Gemini Omni) generation backends for image_generate / video_generate, using the google-genai SDK."
 author: bytecakelake
 kind: backend
 license: Apache-2.0
+requires_hermes: ">=0.21.0"
 requires_env:
-  - GEMINI_API_KEY
+  - name: GEMINI_API_KEY
+    description: "Google AI Studio API key (GOOGLE_API_KEY is also accepted)"
+    url: "https://aistudio.google.com/apikey"
+    secret: true
 python_dependencies:
   - "google-genai>=2.12,<3"

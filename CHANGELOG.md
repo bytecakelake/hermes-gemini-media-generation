@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2 - 2026-10-26
+
+* `GEMINI_API_KEY` is declared with `secret: true` so Hermes masks it at install time.
+* Declare `requires_hermes: ">=0.21.0"` (the plugin uses `CatalogProviderBase`, added in 0.21.0).
+
 ## 0.1.1 - 2026-10-26
 
 * **Fix: dependency could not be installed alongside Hermes.** 0.1.0 required

@@ -13,7 +13,7 @@ maintainer: bytecakelake
 tier: community
 category: media
 docs_url: https://github.com/bytecakelake/hermes-gemini-media-generation#readme
-version: "0.1.1"
+version: "0.1.2"
 platforms: []
 capabilities:
   provides_tools: []

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "hermes-gemini-media-generation"
-version = "0.1.1"
+version = "0.1.2"
 description = "Google Gemini image and video generation backends for Hermes Agent"
 readme = "README.md"
 requires-python = ">=3.10"
